@@ -18,6 +18,7 @@ public class MainPrueba {
 		System.out.println(reporteGastos.imprimir(reporteGastos.añadirGastos())); // imprime bien pero me cuesta hacer
 																					// el resultadoEsperado
 		System.out.println(resultadoEsperado);
+		System.out.println("");
 
 		/*
 		 * Expenses 2022-04-10 Cena 1 Desayuno 2 Alquiler de Autos 3 Gastos de comida: 3
