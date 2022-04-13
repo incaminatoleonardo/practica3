@@ -14,7 +14,7 @@ import com.opencsv.CSVReader;
 public class Recaudacion {
 	public static List<Map<String, String>> where(Map<String, String> options) throws IOException {
 		List<String[]> csvData = new ArrayList<String[]>();
-		CSVReader reader = new CSVReader(new FileReader("data.csv")); // xml, esta en la raiz del proyecto
+		CSVReader reader = new CSVReader(new FileReader("data.csv"));
 		String[] row = null;
 
 		while ((row = reader.readNext()) != null) {
