@@ -69,8 +69,7 @@ public class ReporteDeGastos {
 			}
 
 			String marcaExcesoComidas = gasto.tipoGasto == TipoDeGasto.CENA && gasto.monto > 5000
-					|| gasto.tipoGasto == TipoDeGasto.DESAYUNO && gasto.monto > 1000 ? "X" : " "; // PREGUNTAR
-																									// ESTO!!!!!!!
+					|| gasto.tipoGasto == TipoDeGasto.DESAYUNO && gasto.monto > 1000 ? "X" : " ";
 
 			// System.out.println(nombreGasto + "\t" + gasto.monto + "\t" +
 			// marcaExcesoComidas);
