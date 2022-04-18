@@ -11,86 +11,62 @@ import java.util.Map;
 
 import com.opencsv.CSVReader;
 
-import pesistenciaDatos.DataCSV;
+public class RecaudacionOriginal {
 
-public class Recaudacion {
+	public static List<Map<String, String>> where(Map<String, String> options) throws IOException {
+		List<String[]> csvData = new ArrayList<String[]>();
+		CSVReader reader = new CSVReader(new FileReader("data.csv"));
+		String[] row = null;
 
-	private DataCSV datos;
+		while ((row = reader.readNext()) != null) {
+			csvData.add(row);
+		}
 
-	public Recaudacion(DataCSV datos) {
-		super();
-		this.datos = datos;
-	}
-
-	public List<Map<String, String>> where(Map<String, String> options) throws IOException {
-		/*
-		 * List<String[]> csvData = new ArrayList<String[]>(); CSVReader reader = new
-		 * CSVReader(new FileReader("data.csv")); String[] row = null;
-		 * 
-		 * while ((row = reader.readNext()) != null) { csvData.add(row); }
-		 * 
-		 * reader.close(); csvData.remove(0); // meter hasta aca en la interfaz datoscsv
-		 */
-
-		List<String[]> csvData = null;
-		this.datos.leer(); // deberia sacar este leer
+		reader.close();
+		csvData.remove(0);
 
 		if (options.containsKey("company_name")) {
-			/*
-			 * List<String[]> results = new ArrayList<String[]>(); // poner todo lo del if
-			 * en un metodo en DataCSV
-			 * 
-			 * for (int i = 0; i < csvData.size(); i++) { if
-			 * (csvData.get(i)[1].equals(options.get("company_name"))) {
-			 * results.add(csvData.get(i)); } }
-			 */
-			// csvData = this.datos.buscar(options.get("company_name"), 1);
+			List<String[]> results = new ArrayList<String[]>();
 
-			csvData = datos.filtrar((csvDato) -> csvDato[1].equals(options.get("company_name")));
+			for (int i = 0; i < csvData.size(); i++) {
+				if (csvData.get(i)[1].equals(options.get("company_name"))) {
+					results.add(csvData.get(i));
+				}
+			}
+			csvData = results;
 		}
 
 		if (options.containsKey("city")) {
-//			List<String[]> results = new ArrayList<String[]>();
-//
-//			for (int i = 0; i < csvData.size(); i++) {
-//				if (csvData.get(i)[4].equals(options.get("city"))) {
-//					results.add(csvData.get(i));
-//				}
-//			}
-//			csvData = results;
+			List<String[]> results = new ArrayList<String[]>();
 
-//			csvData = this.datos.buscar(options.get("city"), 4);
-
-			csvData = datos.filtrar((csvDato) -> csvDato[4].equals(options.get("city")));
+			for (int i = 0; i < csvData.size(); i++) {
+				if (csvData.get(i)[4].equals(options.get("city"))) {
+					results.add(csvData.get(i));
+				}
+			}
+			csvData = results;
 		}
 
 		if (options.containsKey("state")) {
+			List<String[]> results = new ArrayList<String[]>();
 
-			csvData = datos.filtrar((csvDato) -> csvDato[5].equals(options.get("state")));
-
-//			List<String[]> results = new ArrayList<String[]>();
-//
-//			for (int i = 0; i < csvData.size(); i++) {
-//				if (csvData.get(i)[5].equals(options.get("state"))) {
-//					results.add(csvData.get(i));
-//				}
-//			}
-//			csvData = results;
-
-//			csvData = this.datos.buscar(options.get("state"), 5);
+			for (int i = 0; i < csvData.size(); i++) {
+				if (csvData.get(i)[5].equals(options.get("state"))) {
+					results.add(csvData.get(i));
+				}
+			}
+			csvData = results;
 		}
 
 		if (options.containsKey("round")) {
-//			List<String[]> results = new ArrayList<String[]>();
-//
-//			for (int i = 0; i < csvData.size(); i++) {
-//				if (csvData.get(i)[9].equals(options.get("round"))) {
-//					results.add(csvData.get(i));
-//				}
-//			}
-//			csvData = results;
+			List<String[]> results = new ArrayList<String[]>();
 
-			csvData = datos.filtrar((csvDato) -> csvDato[9].equals(options.get("round")));
+			for (int i = 0; i < csvData.size(); i++) {
+				if (csvData.get(i)[9].equals(options.get("round"))) {
+					results.add(csvData.get(i));
+				}
+			}
+			csvData = results;
 		}
 
 		List<Map<String, String>> output = new ArrayList<Map<String, String>>();
@@ -203,14 +179,12 @@ public class Recaudacion {
 
 	public static void main(String[] args) {
 		try {
-			Recaudacion Recaudacion = new Recaudacion(new DataCSV());
-
 			Map<String, String> options = new HashMap<String, String>();
 			options.put("company_name", "Facebook");
 			options.put("round", "a");
 			int resultadoEsperado = 1;
-			System.out.print(Recaudacion.where(options).size());
-			assertEquals(resultadoEsperado, Recaudacion.where(options).size());
+			System.out.print(RecaudacionOriginal.where(options).size());
+			assertEquals(resultadoEsperado, RecaudacionOriginal.where(options).size());
 		} catch (IOException e) {
 			System.out.print(e.getMessage());
 			System.out.print("error");

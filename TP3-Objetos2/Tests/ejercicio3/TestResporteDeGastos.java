@@ -2,6 +2,7 @@ package ejercicio3;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
@@ -16,7 +17,7 @@ class TestResporteDeGastos {
 		// SET UP
 		ReporteDeGastos reporteGastos = new ReporteDeGastos(new ArrayList());
 
-		String resultadoEsperado = "Expenses 2022-04-13\r\n" + "Cena	1	 \r\n" + "Desayuno	2	 \r\n"
+		String resultadoEsperado = "Expenses " + LocalDate.now() + "\r\n" + "Cena	1	 \r\n" + "Desayuno	2	 \r\n"
 				+ "Alquiler de Autos	3	 \r\n" + "Gastos de comida: 3\r\n" + "Total de gastos: 6";
 
 		// System.out.println(reporteGastos.imprimir(reporteGastos.añadirGastos()));

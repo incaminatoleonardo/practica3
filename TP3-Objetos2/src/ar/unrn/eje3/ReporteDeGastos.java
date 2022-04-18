@@ -3,22 +3,12 @@ package ar.unrn.eje3;
 import java.time.LocalDate;
 import java.util.List;
 
-enum TipoDeGasto {
+// aplicar collectinparametro
+
+/*enum TipoDeGasto {
 	CENA, DESAYUNO, ALQUILER_AUTO
 
-}
-
-class Gasto {
-	TipoDeGasto tipoGasto;
-	int monto;
-
-	public Gasto(TipoDeGasto tipoGasto, int monto) {
-		super();
-		this.tipoGasto = tipoGasto;
-		this.monto = monto;
-	}
-
-}
+}*/
 
 public class ReporteDeGastos {
 
@@ -31,9 +21,9 @@ public class ReporteDeGastos {
 
 	public List<Gasto> añadirGastos() {
 
-		Gasto gastoCena = new Gasto(TipoDeGasto.CENA, 1);
-		Gasto gastoDesayuno = new Gasto(TipoDeGasto.DESAYUNO, 2);
-		Gasto gastoAlquilerAuto = new Gasto(TipoDeGasto.ALQUILER_AUTO, 3);
+		Gasto gastoCena = new GastoCena(1);
+		Gasto gastoDesayuno = new GastoDesayuno(2);
+		Gasto gastoAlquilerAuto = new GastoAlquilerAuto(3);
 
 		gastos.add(gastoCena);
 		gastos.add(gastoDesayuno);
@@ -49,43 +39,44 @@ public class ReporteDeGastos {
 
 		// System.out.println("Expenses " + LocalDate.now());
 		String reporteCompleto = "Expenses " + LocalDate.now() + System.lineSeparator();
+		String reporteCompleto2 = "Expenses " + LocalDate.now() + System.lineSeparator();
 
 		for (Gasto gasto : gastos) {
-			if (gasto.tipoGasto == TipoDeGasto.CENA || gasto.tipoGasto == TipoDeGasto.DESAYUNO) {
-				gastosDeComida += gasto.monto;
-			}
+			/*
+			 * if (gasto.tipoGasto == TipoDeGasto.CENA || gasto.tipoGasto ==
+			 * TipoDeGasto.DESAYUNO) { gastosDeComida += gasto.monto; }
+			 * 
+			 * String nombreGasto = ""; switch (gasto.tipoGasto) { case CENA: nombreGasto =
+			 * "Cena"; break; case DESAYUNO: nombreGasto = "Desayuno"; break; case
+			 * ALQUILER_AUTO: nombreGasto = "Alquiler de Autos"; break; }
+			 */
 
-			String nombreGasto = "";
-			switch (gasto.tipoGasto) {
-			case CENA:
-				nombreGasto = "Cena";
-				break;
-			case DESAYUNO:
-				nombreGasto = "Desayuno";
-				break;
-			case ALQUILER_AUTO:
-				nombreGasto = "Alquiler de Autos";
-				break;
-			}
+			reporteCompleto2 = reporteCompleto2 + gasto.reporte();
+			gastosDeComida += gasto.montoComida();
 
-			String marcaExcesoComidas = gasto.tipoGasto == TipoDeGasto.CENA && gasto.monto > 5000
-					|| gasto.tipoGasto == TipoDeGasto.DESAYUNO && gasto.monto > 1000 ? "X" : " ";
+			/*
+			 * String marcaExcesoComidas = gasto.tipoGasto == TipoDeGasto.CENA &&
+			 * gasto.monto > 5000 || gasto.tipoGasto == TipoDeGasto.DESAYUNO && gasto.monto
+			 * > 1000 ? "X" : " ";
+			 */
 
 			// System.out.println(nombreGasto + "\t" + gasto.monto + "\t" +
 			// marcaExcesoComidas);
-			reporteCompleto = reporteCompleto + nombreGasto + "\t" + gasto.monto + "\t" + marcaExcesoComidas
-					+ System.lineSeparator();
+			/*
+			 * reporteCompleto = reporteCompleto + nombreGasto + "\t" + gasto.monto + "\t" +
+			 * marcaExcesoComidas + System.lineSeparator();
+			 */
 
-			total += gasto.monto;
+			total += gasto.montoTotal();
 		}
 
 		// System.out.println("Gastos de comida: " + gastosDeComida);
-		reporteCompleto = reporteCompleto + "Gastos de comida: " + gastosDeComida + System.lineSeparator();
+		reporteCompleto2 = reporteCompleto2 + "Gastos de comida: " + gastosDeComida + System.lineSeparator();
 
 		// System.out.println("Total de gastos: " + total);
-		reporteCompleto = reporteCompleto + "Total de gastos: " + total;
+		reporteCompleto2 = reporteCompleto2 + "Total de gastos: " + total;
 
 		// System.out.println(reporteCompleto);
-		return reporteCompleto;
+		return reporteCompleto2;
 	}
 }
