@@ -28,32 +28,25 @@ public class DataCSV implements Datos {
 
 	}
 
-	public List<String[]> buscar(String columna, int numero) throws IOException {
-
-		List<String[]> results = new ArrayList<String[]>(); // poner todo lo del if en un metodo en DataCSV
-
-		for (int i = 0; i < csvData.size(); i++) {
-			// borrar este buscar
-		}
-
-		return results;
-	}
-
 	private void agregar(Condicion c, List<String[]> results, int indice) {
 		if (c.condicion(csvData.get(indice))) {
 			results.add(csvData.get(indice));
 		}
 	}
 
-	public List<String[]> filtrar(Condicion c) {
+	public List<String[]> filtrar(Condicion c) throws IOException {
+		// hacer el leer cargarlo en una variable y preguntar por null
+
+		if (this.csvData.size() == 0) {
+
+			this.leer();
+
+		}
 		List<String[]> results = new ArrayList<String[]>();
 
 		for (int i = 0; i < csvData.size(); i++) {
 			this.agregar(c, results, i);
 
-//			if (c.condicion(csvData.get(i))) {
-//				results.add(csvData.get(i));
-//			}
 		}
 		csvData = results;
 		return results;

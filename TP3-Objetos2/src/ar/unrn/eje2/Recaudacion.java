@@ -23,43 +23,15 @@ public class Recaudacion {
 	}
 
 	public List<Map<String, String>> where(Map<String, String> options) throws IOException {
-		/*
-		 * List<String[]> csvData = new ArrayList<String[]>(); CSVReader reader = new
-		 * CSVReader(new FileReader("data.csv")); String[] row = null;
-		 * 
-		 * while ((row = reader.readNext()) != null) { csvData.add(row); }
-		 * 
-		 * reader.close(); csvData.remove(0); // meter hasta aca en la interfaz datoscsv
-		 */
 
 		List<String[]> csvData = null;
-		this.datos.leer(); // deberia sacar este leer
 
 		if (options.containsKey("company_name")) {
-			/*
-			 * List<String[]> results = new ArrayList<String[]>(); // poner todo lo del if
-			 * en un metodo en DataCSV
-			 * 
-			 * for (int i = 0; i < csvData.size(); i++) { if
-			 * (csvData.get(i)[1].equals(options.get("company_name"))) {
-			 * results.add(csvData.get(i)); } }
-			 */
-			// csvData = this.datos.buscar(options.get("company_name"), 1);
 
 			csvData = datos.filtrar((csvDato) -> csvDato[1].equals(options.get("company_name")));
 		}
 
 		if (options.containsKey("city")) {
-//			List<String[]> results = new ArrayList<String[]>();
-//
-//			for (int i = 0; i < csvData.size(); i++) {
-//				if (csvData.get(i)[4].equals(options.get("city"))) {
-//					results.add(csvData.get(i));
-//				}
-//			}
-//			csvData = results;
-
-//			csvData = this.datos.buscar(options.get("city"), 4);
 
 			csvData = datos.filtrar((csvDato) -> csvDato[4].equals(options.get("city")));
 		}
@@ -68,27 +40,9 @@ public class Recaudacion {
 
 			csvData = datos.filtrar((csvDato) -> csvDato[5].equals(options.get("state")));
 
-//			List<String[]> results = new ArrayList<String[]>();
-//
-//			for (int i = 0; i < csvData.size(); i++) {
-//				if (csvData.get(i)[5].equals(options.get("state"))) {
-//					results.add(csvData.get(i));
-//				}
-//			}
-//			csvData = results;
-
-//			csvData = this.datos.buscar(options.get("state"), 5);
 		}
 
 		if (options.containsKey("round")) {
-//			List<String[]> results = new ArrayList<String[]>();
-//
-//			for (int i = 0; i < csvData.size(); i++) {
-//				if (csvData.get(i)[9].equals(options.get("round"))) {
-//					results.add(csvData.get(i));
-//				}
-//			}
-//			csvData = results;
 
 			csvData = datos.filtrar((csvDato) -> csvDato[9].equals(options.get("round")));
 		}

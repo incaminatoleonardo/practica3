@@ -13,27 +13,27 @@ import pesistenciaDatos.DataCSV;
 
 public class RecaudacionTest {
 
-	Recaudacion Recaudacion = new Recaudacion(new DataCSV()); // lo puse en mayuscula PERO SE QUE ESTA MAL
+	Recaudacion recaudacion = new Recaudacion(new DataCSV());
 
 	@Test
 	public void testWhereGivenCompany() throws IOException {
 		Map<String, String> options = new HashMap<String, String>();
 		options.put("company_name", "Facebook");
-		Assert.assertEquals(Recaudacion.where(options).size(), 7);
+		Assert.assertEquals(recaudacion.where(options).size(), 7);
 	}
 
 	@Test
 	public void testWhereGivenCity() throws IOException {
 		Map<String, String> options = new HashMap<String, String>();
 		options.put("city", "Tempe");
-		Assert.assertEquals(Recaudacion.where(options).size(), 3);
+		Assert.assertEquals(recaudacion.where(options).size(), 3);
 	}
 
 	@Test
 	public void testWhereGivenState() throws IOException {
 		Map<String, String> options = new HashMap<String, String>();
 		options.put("state", "CA");
-		Assert.assertEquals(Recaudacion.where(options).size(), 873);
+		Assert.assertEquals(recaudacion.where(options).size(), 873);
 	}
 
 	@Test
@@ -41,7 +41,7 @@ public class RecaudacionTest {
 		try {
 			Map<String, String> options = new HashMap<String, String>();
 			options.put("round", "a");
-			Assert.assertEquals(Recaudacion.where(options).size(), 582);
+			Assert.assertEquals(recaudacion.where(options).size(), 582);
 		} catch (IOException e) {
 		}
 	}
@@ -51,21 +51,21 @@ public class RecaudacionTest {
 		Map<String, String> options = new HashMap<String, String>();
 		options.put("round", "a");
 		options.put("company_name", "Facebook");
-		Assert.assertEquals(Recaudacion.where(options).size(), 1);
+		Assert.assertEquals(recaudacion.where(options).size(), 1);
 	}
 
 	@Test
 	public void testWhereNotExists() throws IOException {
 		Map<String, String> options = new HashMap<String, String>();
 		options.put("company_name", "NotFacebook");
-		Assert.assertEquals(Recaudacion.where(options).size(), 0);
+		Assert.assertEquals(recaudacion.where(options).size(), 0);
 	}
 
 	@Test
 	public void testWhereCorrectKeys() throws IOException {
 		Map<String, String> options = new HashMap<String, String>();
 		options.put("company_name", "Facebook");
-		Map<String, String> row = Recaudacion.where(options).get(0);
+		Map<String, String> row = recaudacion.where(options).get(0);
 
 		assertEquals(row.get("permalink"), "facebook");
 		assertEquals(row.get("company_name"), "Facebook");
@@ -83,7 +83,7 @@ public class RecaudacionTest {
 	public void testFindByGivenCompanyName() throws IOException, NoSuchEntryException {
 		Map<String, String> options = new HashMap<String, String>();
 		options.put("company_name", "Facebook");
-		Map<String, String> row = Recaudacion.findBy(options);
+		Map<String, String> row = recaudacion.findBy(options);
 
 		assertEquals(row.get("permalink"), "facebook");
 		assertEquals(row.get("company_name"), "Facebook");
@@ -100,7 +100,7 @@ public class RecaudacionTest {
 	public void testFindByGivenState() throws IOException, NoSuchEntryException {
 		Map<String, String> options = new HashMap<String, String>();
 		options.put("state", "CA");
-		Map<String, String> row = Recaudacion.findBy(options);
+		Map<String, String> row = recaudacion.findBy(options);
 
 		assertEquals(row.get("permalink"), "digg");
 		assertEquals(row.get("company_name"), "Digg");
@@ -118,7 +118,7 @@ public class RecaudacionTest {
 		Map<String, String> options = new HashMap<String, String>();
 		options.put("company_name", "Facebook");
 		options.put("round", "c");
-		Map<String, String> row = Recaudacion.findBy(options);
+		Map<String, String> row = recaudacion.findBy(options);
 
 		assertEquals(row.get("permalink"), "facebook");
 		assertEquals(row.get("company_name"), "Facebook");
@@ -137,7 +137,7 @@ public class RecaudacionTest {
 		options.put("company_name", "NotFacebook");
 		options.put("round", "c");
 		try {
-			Map<String, String> row = Recaudacion.findBy(options);
+			Map<String, String> row = recaudacion.findBy(options);
 			Assert.fail("findBy should throw exception");
 		} catch (NoSuchEntryException e) {
 			// Esta bien que salga por el catch
